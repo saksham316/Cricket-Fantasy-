@@ -6,6 +6,7 @@ const otpSchema = new mongoose.Schema(
     email: String,
     expiresAt: {
       type: Date,
+      default: Date.now,
       // required:[true,"Expiry Date of otp must be provided"]
     },
   },

@@ -65,7 +65,7 @@ export const resendOtp = asyncErrorHandler(async (req, res) => {
   const { email, otp } = req?.body;
 
   // fetching the otp document
-  const otpDoc = await otpModel.findOne({ email });
+  const otpDoc = await otpModel.findOneAndDelete({ email });
 
   // Verifying OTP
   if (otpDoc?.otp === otp) {
