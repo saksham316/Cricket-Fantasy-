@@ -21,6 +21,10 @@ export const sendOtp = asyncErrorHandler(async (req, res) => {
     otp += Math.floor(Math.random() * 10);
   }
 
+  const otpDoc = new otpModel({ otp, email });
+
+  await otpDoc.save();
+s
   await sendOtp(email, otp);
 
   return res.status(200).json({
