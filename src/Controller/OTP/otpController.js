@@ -2,6 +2,7 @@
 import otpModel from "../../Model/OTP/otpModel.js";
 import { asyncErrorHandler } from "../../Utils/Error/asyncErrorHandler.js";
 import { CustomError } from "../../Utils/Error/customError.js";
+import { sendOtpMail } from "../../Utils/Mail/sendOtp.js";
 // ---------------------------------------------------------------------------------------------------------
 
 // @method - POST
@@ -10,6 +11,7 @@ import { CustomError } from "../../Utils/Error/customError.js";
 export const sendOtp = asyncErrorHandler(async (req, res) => {
   // Extracting the email from the request body
   const { email } = req?.body;
+
 
   // Deleting any existing OTPs associated with the email to confirm that the user is now deleted
   await otpModel.findOneAndDelete({ email });
@@ -24,8 +26,8 @@ export const sendOtp = asyncErrorHandler(async (req, res) => {
   const otpDoc = new otpModel({ otp, email });
 
   await otpDoc.save();
-s
-  await sendOtp(email, otp);
+
+  await sendOtpMail(email, otp);
 
   return res.status(200).json({
     success: true,
@@ -36,15 +38,17 @@ s
 // @method - POST
 // @desc - controller to verify the otp
 // @url - /otp/verify
-export const verifyOtp = asyncErrorHandler(async (req, res) => {
+export const verifyOtp = asyncErrorHandler(async (req, res,next) => {
   // Extracting the email from the request body
   const { email, otp } = req?.body;
 
   // fetching the otp document
   const otpDoc = await otpModel.findOne({ email });
 
+  console.log(otpDoc)
+
   // Verifying OTP
-  if (otpDoc?.otp === otp) {
+  if (otpDoc && otpDoc?.otp === otp) {
     // deleting the otp after verification
     await otpModel.findOneAndDelete({ email });
 
@@ -53,7 +57,8 @@ export const verifyOtp = asyncErrorHandler(async (req, res) => {
       message: "Otp Verified Successfully",
     });
   } else {
-    return new CustomError("Invalid Otp", 400);
+    const error = new CustomError("Invalid Otp", 400);
+    return next(error)
   }
 });
 
@@ -62,7 +67,7 @@ export const verifyOtp = asyncErrorHandler(async (req, res) => {
 // @url - /otp/resend
 export const resendOtp = asyncErrorHandler(async (req, res) => {
   // Extracting the email from the request body
-  const { email, otp } = req?.body;
+  const { email } = req?.body;
 
   // fetching the otp document
   const otpDoc = await otpModel.findOneAndDelete({ email });

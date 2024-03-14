@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 // -----------------------------------------------------------------------------------------------------
 
 // sendOtp - this method is used to send otp on users mail
-export const sendOtp = (email, otp) => {
+export const sendOtpMail = (email, otp) => {
   // transporter - configuration nodemailer with credentials to send mail
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -14,6 +14,8 @@ export const sendOtp = (email, otp) => {
       pass: process.env.NODEMAILER_MAIL_PASSWORD,
     },
   });
+
+  console.log(email)
 
   //   mailOptions - details of the user to whom the mail needs to be delivered
  let  mailOptions = {
