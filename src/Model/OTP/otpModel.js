@@ -10,8 +10,7 @@ const otpSchema = new mongoose.Schema(
     },
     expiresAt: {
       type: Date,
-      default: Date.now,
-      // required:[true,"Expiry Date of otp must be provided"]
+      required:[true,"Expiry Time of otp must be provided"]
     },
   },
   { timestamps: true }
