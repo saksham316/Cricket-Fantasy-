@@ -49,6 +49,7 @@ import { otpRouter } from "./src/Routes/OTP/otpRoutes.js";
 import { profileRouter } from "./src/Routes/Profile/profileRoutes.js";
 import { termsAndConditionsRouter } from "./src/Routes/TermsAndConditions/termsAndConditionsRoutes.js";
 import { privacyPolicyRouter } from "./src/Routes/PrivacyPolicy/privacyPolicyRoutes.js";
+import { teamRouter } from "./src/Routes/Team/teamRoutes.js";
 
 app.all(["/", "/api", "/api/v1"], (req, res, next) => {
   return res.status(200).json({
@@ -60,6 +61,7 @@ app.use(versionOne("otp"), otpRouter); // otp router
 app.use(versionOne("profile"), profileRouter); // profile router
 app.use(versionOne("terms"), termsAndConditionsRouter); // termsAndConditions router
 app.use(versionOne("privacy"), privacyPolicyRouter); // privacyPolicy router
+app.use(versionOne("team"), teamRouter); // privacyPolicy router
 // -------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------Global Error Handling----------------------------------------------
