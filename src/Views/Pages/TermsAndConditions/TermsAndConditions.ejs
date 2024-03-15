@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #3366cc;
+            font-weight: bold;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section-content {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Terms and Conditions</h1>
+
+        <div class="section">
+            <p class="section-title">1. Introduction</p>
+            <div class="section-content">
+                <p>
+                    <%= terms.introduction %>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <p class="section-title">2. Conditions</p>
+            <div class="section-content">
+                <p>You are restricted from all of the following:</p>
+                <ul>
+                    <% terms?.conditions.forEach((term)=>{ %>
+                        <li>
+                            <%= term %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add more sections as needed -->
+
+    </div>
+</body>
+
+</html>
