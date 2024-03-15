@@ -3,6 +3,7 @@ import { profileModel } from "../../Models/Profile/profileModel.js";
 import { asyncErrorHandler } from "../../Utils/Error/asyncErrorHandler.js";
 import { CustomError } from "../../Utils/Error/customError.js";
 import { pick } from "lodash-es";
+import mongoose from "mongoose";
 // -----------------------------------------------------------------------------------------------------------
 
 // @method - POST
@@ -38,9 +39,34 @@ export const getProfile = asyncErrorHandler(async (req, res) => {
   return res.render(`Pages/Profile/ProfileList`, {
     profilesList: profile
   })
-  // return res.status(200).json({
-  //   success: true,
-  //   message: "Profile Created Successfully",
-  //   data: { profile },
-  // });
+});
+
+// @method - GET
+// @desc - controller to get the profile
+// @url - /:userId
+export const getUserProfile = asyncErrorHandler(async (req, res, next) => {
+
+  const { userId } = req?.params;
+
+  if (!userId) {
+    const error = new CustomError("User Id is a required field", 400);
+    return next(error)
+  }
+
+  console.log(userId)
+
+  let pipeline = [
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(userId)
+      }
+    }
+  ];
+
+
+  const [result] = await profileModel.aggregate(pipeline);
+
+  return res.render(`Pages/Profile/UserProfile`, {
+    profile: result
+  })
 });

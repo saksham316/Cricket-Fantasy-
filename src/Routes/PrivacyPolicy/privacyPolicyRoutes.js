@@ -1,21 +1,15 @@
 // ----------------------------------------------Imports-------------------------------------------------
 import express from "express";
-import {
-  createProfile,
-  getProfile,
-  getUserProfile,
-} from "../../Controllers/Profile/profileController.js";
+import { createPrivacyPolicy, getPrivacyPolicy } from "../../Controllers/PrivacyPolicy/privacyPolicyController.js";
+
 // -------------------------------------------------------------------------------------------------------
 
-export const profileRouter = express.Router();
+export const privacyPolicyRouter = express.Router();
 
 // --------------------------------------------------------------------------------------------------------
 
 // createProfile
-profileRouter.route("/").post(createProfile);
+privacyPolicyRouter.route("/").patch(createPrivacyPolicy);
 
 // getProfile
-profileRouter.route("/").get(getProfile);
-
-// getUserProfile
-profileRouter.route("/:userId").get(getUserProfile);
+privacyPolicyRouter.route("/").get(getPrivacyPolicy);

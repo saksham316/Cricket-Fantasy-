@@ -6,14 +6,13 @@ import { pick } from "lodash-es";
 // -----------------------------------------------------------------------------------------------------------
 
 // @method - POST
-// @desc - controller to create the profile
+// @desc - controller to create the terms and conditions
 // @url - /
 export const createTermsAndConditions = asyncErrorHandler(async (req, res, next) => {
 
     const { introduction, conditions } = req?.body;
 
     if (!introduction || !conditions.length > 0) {
-        console.log("enter ehere")
         const error = new CustomError("Please provide the complete details", 400);
         return next(error)
     }
@@ -33,7 +32,7 @@ export const createTermsAndConditions = asyncErrorHandler(async (req, res, next)
 });
 
 // @method - GET
-// @desc - controller to get the profile
+// @desc - controller to get the terms and conditions page
 // @url - /
 export const getTermsAndConditions = asyncErrorHandler(async (req, res, next) => {
     const [termsDoc] = await termsModel.find();
