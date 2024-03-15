@@ -27,6 +27,9 @@ app.use(
 );
 // -------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------Middlewares----------------------------------------------------
+
+app.set("view engine","ejs")
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 // -------------------------------------------------------------------------------------------------------------
@@ -39,6 +42,7 @@ const versionOne = (route) => {
 
 // Imports
 import { otpRouter } from "./src/Routes/OTP/otpRoutes.js";
+import { profileRouter } from "./src/Routes/Profile/profileRoutes.js";
 
 app.all(["/", "/api", "/api/v1"], (req, res, next) => {
   return res.status(200).json({
@@ -47,6 +51,7 @@ app.all(["/", "/api", "/api/v1"], (req, res, next) => {
 });
 
 app.use(versionOne("otp"), otpRouter); // otp router
+app.use(versionOne("profile"), profileRouter); // profile router
 // -------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------Global Error Handling----------------------------------------------

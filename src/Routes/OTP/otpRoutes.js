@@ -18,4 +18,4 @@ otpRouter.route("/").post(sendOtp);
 otpRouter.route("/verify").post(verifyOtp);
 
 // resendOtp
-otpRouter.route("/resend").post(resendOtp);
+otpRouter.route("/resend").patch(resendOtp);

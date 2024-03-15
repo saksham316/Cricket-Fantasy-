@@ -1,6 +1,8 @@
 // ---------------------------------------------Imports-------------------------------------------------------
-import { profileModel } from "../../Model/Profile/profileModel";
-import { CustomError } from "../../Utils/Error/customError";
+import { profileModel } from "../../Model/Profile/profileModel.js";
+import { asyncErrorHandler } from "../../Utils/Error/asyncErrorHandler.js";
+import { CustomError } from "../../Utils/Error/customError.js";
+import { pick } from "lodash-es";
 // -----------------------------------------------------------------------------------------------------------
 
 // @method - POST
@@ -30,9 +32,12 @@ export const createProfile = asyncErrorHandler(async (req, res) => {
 // @url - /
 export const getProfile = asyncErrorHandler(async (req, res) => {
   const profile = await profileModel.find();
-  return res.status(200).json({
-    success: true,
-    message: "Profile Created Successfully",
-    data: { profile },
-  });
+
+
+  return res.send(`<h1>Hello profile</h1>`)
+  // return res.status(200).json({
+  //   success: true,
+  //   message: "Profile Created Successfully",
+  //   data: { profile },
+  // });
 });
