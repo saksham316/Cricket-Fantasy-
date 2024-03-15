@@ -1,5 +1,5 @@
 // ---------------------------------------------Imports-------------------------------------------------------
-import { profileModel } from "../../Model/Profile/profileModel.js";
+import { profileModel } from "../../Models/Profile/profileModel.js";
 import { asyncErrorHandler } from "../../Utils/Error/asyncErrorHandler.js";
 import { CustomError } from "../../Utils/Error/customError.js";
 import { pick } from "lodash-es";
@@ -34,7 +34,10 @@ export const getProfile = asyncErrorHandler(async (req, res) => {
   const profile = await profileModel.find();
 
 
-  return res.send(`<h1>Hello profile</h1>`)
+
+  return res.render(`Pages/Profile/ProfileList`, {
+    profilesList: profile
+  })
   // return res.status(200).json({
   //   success: true,
   //   message: "Profile Created Successfully",

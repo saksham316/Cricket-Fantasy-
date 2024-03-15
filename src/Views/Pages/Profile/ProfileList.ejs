@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Listing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        table{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        tr th{
+            padding: 10px;
+            border: 2px solid black;
+        }
+        tr td{
+            padding: 10px;
+            border: 2px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registered Profiles List</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>ID</th>
+            </tr>
+            <% profilesList.map((profile)=> { %>
+                <tr>
+                    <td>
+                        <%=profile.name%>
+                    </td>
+                    <td>
+                        <%=profile.email%>
+                    </td>
+                    <td>
+                        <%=profile.id%>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>

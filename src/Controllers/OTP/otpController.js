@@ -1,5 +1,5 @@
 // ----------------------------------------------Imports----------------------------------------------------
-import otpModel from "../../Model/OTP/otpModel.js";
+import otpModel from "../../Models/OTP/otpModel.js";
 import { asyncErrorHandler } from "../../Utils/Error/asyncErrorHandler.js";
 import { CustomError } from "../../Utils/Error/customError.js";
 import { sendOtpMail } from "../../Utils/Mail/sendOtp.js";

@@ -4,7 +4,7 @@ import {
   resendOtp,
   sendOtp,
   verifyOtp,
-} from "../../Controller/OTP/otpController.js";
+} from "../../Controllers/OTP/otpController.js";
 // -------------------------------------------------------------------------------------------------------
 
 export const otpRouter = express.Router();

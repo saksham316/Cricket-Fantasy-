@@ -3,12 +3,15 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { CustomError } from "./src/Utils/Error/customError.js";
-import { mongoConnect } from "./src/Config/DB/mongo.js";
+import { mongoConnect } from "./src/Configs/DB/mongo.js";
+import path from "path";
+import { fileURLToPath } from "url";
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 dotenv.config();
 
 const app = express();
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 const PORT = process.env.PORT || 8000;
 
 mongoConnect();
@@ -28,7 +31,8 @@ app.use(
 // -------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------Middlewares----------------------------------------------------
 
-app.set("view engine","ejs")
+app.set("view engine", "ejs");
+app.set("views", path.resolve(dirname, "src/views"))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
